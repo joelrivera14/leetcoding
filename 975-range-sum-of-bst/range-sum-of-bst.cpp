@@ -12,19 +12,15 @@
 class Solution {
 public:
     int rangeSumBST(TreeNode* root, int low, int high) {
-        queue<TreeNode*> tree;
-        tree.push(root);
-        int sum = 0;
-        while(!tree.empty()){
-            int n = tree.size();
-            for(int i = 0; i<n; ++i){
-                TreeNode* node = tree.front();
-                tree.pop();
-                if(node->val>=low && node->val<=high)sum+=node->val;
-                if(node->left)tree.push(node->left);
-                if(node->right)tree.push(node->right);
-            }
+        if(root == nullptr) return 0;
+        int ans = 0;
+        if(low<=root->val && root->val<=high) ans += root->val;
+        if(low<=root->val){
+            ans += rangeSumBST(root->left, low, high);
         }
-        return sum;
+        if(root->val<=high){
+            ans += rangeSumBST(root->right, low, high);
+        }
+        return ans;
     }
 };
