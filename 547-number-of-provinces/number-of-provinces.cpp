@@ -1,10 +1,9 @@
 class Solution {
 public:
     unordered_map<int, vector<int>>graph;
-    vector<bool> seen;
+    vector<bool>seen;
     int findCircleNum(vector<vector<int>>& isConnected) {
         int n = isConnected.size();
-        //equal to writing vector<bool> seen(n,false)
         seen = vector(n,false);
         for(int i = 0; i<n; ++i){
             for(int j = i+1; j<n; ++j){
@@ -14,10 +13,10 @@ public:
                 }
             }
         }
+
         int ans = 0;
-        for(int i = 0; i<n; i++){
-            //can also write !seen[i]
-            if(seen[i] == false){
+        for(int i = 0; i<n; ++i){
+            if(!seen[i]){
                 ans++;
                 seen[i] = true;
                 dfs(i);
@@ -26,11 +25,11 @@ public:
         return ans;
     }
     void dfs(int node){
-        for(int neighbor : graph[node]){
-            if(!seen[neighbor]){
-                seen[neighbor] = true;
-                dfs(neighbor);
-            }
+        for(int neighbors : graph[node]){
+            if(!seen[neighbors]){
+                seen[neighbors] = true;
+                dfs(neighbors);
+           }         
         }
     }
 };
