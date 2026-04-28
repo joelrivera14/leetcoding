@@ -1,10 +1,10 @@
 class Solution {
 public:
-    unordered_map<int, vector<int>>graph;
-    vector<bool>seen;
+    unordered_map<int, vector<int>> graph;
+    vector<bool> seen;
     int findCircleNum(vector<vector<int>>& isConnected) {
         int n = isConnected.size();
-        seen = vector(n,false);
+        seen = vector(n, false);
         for(int i = 0; i<n; ++i){
             for(int j = i+1; j<n; ++j){
                 if(isConnected[i][j] == 1){
@@ -13,7 +13,6 @@ public:
                 }
             }
         }
-
         int ans = 0;
         for(int i = 0; i<n; ++i){
             if(!seen[i]){
@@ -22,14 +21,14 @@ public:
                 dfs(i);
             }
         }
-        return ans;
+    return ans;
     }
-    void dfs(int node){
-        for(int neighbors : graph[node]){
-            if(!seen[neighbors]){
-                seen[neighbors] = true;
-                dfs(neighbors);
-           }         
+    void dfs (int node){
+        for(int neighbor : graph[node]){
+            if(!seen[neighbor]){
+                seen[neighbor] = true;
+                dfs(neighbor);
+            }
         }
     }
 };
