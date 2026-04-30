@@ -1,6 +1,6 @@
 class Solution {
 public:
-    vector<vector<int>>rooms;
+    vector<vector<int>> rooms;
     unordered_set<int> seen;
     bool canVisitAllRooms(vector<vector<int>>& rooms) {
         this->rooms = rooms;
@@ -8,6 +8,7 @@ public:
         dfs(0);
         return seen.size() == rooms.size();
     }
+
     void dfs(int node){
         for(int neighbor : rooms[node]){
             if(!seen.contains(neighbor)){
