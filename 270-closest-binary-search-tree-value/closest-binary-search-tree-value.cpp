@@ -11,22 +11,20 @@
  */
 class Solution {
 public:
+    vector<int> nums;
     int closestValue(TreeNode* root, double target) {
-        vector<int>nums;
-        inOrder(root, nums);
-
-        int closest = nums[0];
+        inOrder(root);
+        int close = nums[0];
         for(int n : nums){
-            if(abs(n-target) < abs(closest-target)) closest = n;
+            if(abs(target-n) < abs(target-close)) close = n;
         }
-        return closest;
-
+        return close;
     }
 
-    void inOrder(TreeNode* node, vector<int>& nums){
-        if(node == nullptr) return;
-        inOrder(node->left,nums);
-        nums.push_back(node->val);
-        inOrder(node->right, nums);
+    void inOrder(TreeNode* root){
+        if(root == nullptr) return;
+        inOrder(root->left);
+        nums.push_back(root->val);
+        inOrder(root->right);
     }
 };
